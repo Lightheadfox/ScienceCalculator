@@ -84,49 +84,105 @@
 }*/
 
 
+//#include <iostream>
+//
+//class Entity
+//{
+//public:
+//	float X, Y;
+//
+//	Entity()
+//	{
+//		X = 0.0f;
+//		Y = 0.0f;
+//
+//
+//	}
+//
+//	Entity(float x, float y)
+//	{
+//		X = x;
+//		Y = y;
+//	
+//	}
+//
+//	void Print()
+//	{
+//
+//		std::cout << X << ", " << Y << std::endl;
+//
+//	}
+//
+//
+//};
+//
+//int main()
+//{
+//	Entity e(10.0f, 5.0f);
+//	
+//
+//	
+//	e.Print();
+//
+//
+//	std::cin.get();
+//
+//
+//
+//
+//}
+
 #include <iostream>
 
-class Entity
+class Log
 {
 public:
-	float X, Y;
+	const int LogLevelError = 0;
+	const int LogLevelWarning = 1;
+	const int LogLevelInfo = 2;
 
-	Entity()
+private:
+	int m_LogLevel = LogLevelInfo;
+
+public:
+	void SetLevel(int level)
 	{
-		X = 0.0f;
-		Y = 0.0f;
+		m_LogLevel = level;
 
+	};
+
+	void Error(const char* message)
+	{
+		if (m_LogLevel >= LogLevelError)
+			std::cout << "[ERROR]: " << message << std::endl;
 
 	}
 
-	Entity(float x, float y)
+	void Warn(const char* message)
 	{
-		X = x;
-		Y = y;
-	
-	}
-
-	void Print()
-	{
-
-		std::cout << X << ", " << Y << std::endl;
+		if (m_LogLevel >= LogLevelWarning)
+			std::cout << "[WARNING]: " << message << std::endl;
 
 	}
 
+	void Info(const char* message)
+	{
+		if (m_LogLevel >= LogLevelInfo)
+			std::cout << "[INFO]: " << message << std::endl;
+
+	}
 
 };
 
 int main()
 {
-	Entity e(10.0f, 5.0f);
-	
-
-	
-	e.Print();
-
+	Log log;
+	log.SetLevel(log.LogLevelWarning);
+	log.Warn("Hello!");
+	log.SetLevel(log.LogLevelInfo);
+	log.Info("FYI!");
 
 	std::cin.get();
-
 
 
 
